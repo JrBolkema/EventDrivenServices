@@ -1,0 +1,3 @@
+FROM docker.io/bitnami/mongodb-sharded:5.0.9
+
+COPY config-data.js /

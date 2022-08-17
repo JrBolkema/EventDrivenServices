@@ -1,0 +1,27 @@
+name: webpresence
+
+ingress:
+  - name: webpresence-ingress
+    bindings:
+      - port: 80
+    rules:
+      - host: www.hypertheory.com
+        service: webpresence
+      - host: hypertheory.com
+        service: webpresence
+
+extensions:
+  - name: dapr
+    components-path: ./components/dev
+
+services:
+  - name: webpresence
+    project: WebPresence/WebPresence.csproj
+
+  # External Services
+
+  - name: mongodb
+    external: true
+    bindings:
+      - port: 27017
+        connectionString: mongodb://root:TokyoJoe138!@localhost:${port}

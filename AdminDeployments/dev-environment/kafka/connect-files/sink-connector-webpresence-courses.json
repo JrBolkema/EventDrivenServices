@@ -1,0 +1,11 @@
+{
+  "name": "course-to-webpresence",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "connection.uri": "mongodb://root:TokyoJoe138!@mongodb-sharded/",
+    "database": "web_db",
+    "collection": "courses",
+    "topics": "hypertheory.training.outgoing.data.courses_db.courses",
+    "change.data.capture.handler": "com.mongodb.kafka.connect.sink.cdc.mongodb.ChangeStreamHandler"
+  }
+}

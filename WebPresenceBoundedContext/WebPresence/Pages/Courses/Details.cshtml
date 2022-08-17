@@ -1,0 +1,54 @@
+﻿
+@page "{courseId}"
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<SiteUser> SignInManager
+@model WebPresence.Pages.Courses.DetailsModel
+@{
+}
+
+@{
+    var course = Model.CourseDetails.Course!;
+    var offerings = Model.CourseDetails.Offerings!;
+}
+
+
+
+
+<h3>Course @course.Title</h3>
+<p>This is a @course.NumberOfDays day course.</p>
+
+<h4>Course Description</h4>
+<p>
+    @course.Description
+</p>
+
+@if(offerings.Count == 0) {
+    <p>Sorry - no Offerings for this course right now. Check back again later!</p>
+} else {
+    @foreach(var offering in offerings) {
+
+        <div class="card">
+            <div class="card-header">
+
+                <h3>@offering.StartDate.ToLongDateString()</h3>
+                <p>@course.Title is offered @offering.DeliveryMethod</p>
+            </div>
+            <div class="card-body">
+                <p>This class starts at @offering.StartTime and ends at @offering.EndTime</p>
+                <p>The price for this course is @offering.Price.ToString("c").</p>
+            </div>
+            <div class="card-footer">
+                @if(SignInManager.IsSignedIn(User)) {
+                    <a asp-page="/Enrollments/New" asp-route-offeringId="@offering.Id">Enroll For this Course, @User.Identity?.Name</a>
+                } else {
+                    <p>You Have to 
+                        <a asp-page="/Account/Login">Sign In</a>
+                        or
+                        <a asp-page="/Account/Register">Create An Account</a> To Enroll
+                    </p>
+                }
+            </div>
+        </div>
+    }
+}
+

@@ -1,0 +1,42 @@
+﻿@page
+@model HypertheoryDocumentation.Pages.DomainModel
+@{
+}
+
+<markdown>
+    # The Hypertheory Domain
+    
+
+    ## Domain Events
+
+    ### `hypertheory-events-useronboarded`
+    
+    When a user is onboarded (usually from WebPresence), this event is sent.
+
+    [The hypertheory-events-useronboarded protobuf file](/docs/domain/hypertheory-events-useronboarded.proto)
+
+    ### `hypertheory-events-enrollment-requested`
+
+    When a user requests enrollment into a course offering.
+
+    [The hypertheory-events-enrollment-requested protobuf file](/docs/domain/hypertheory-events-enrollment-requested.proto)
+
+    ## Domain Documents (Entities)
+    
+    ### `hypertheory-documents-user`
+    
+    Represents a user in our domain.
+
+    [The hypertheory-documents-user protobuf](/docs/domain/hypertheory-documents-user.proto)
+
+    [The hypertheory-documents-user-key protobuf](/docs/domain/hypertheory-documents-user-key.proto)
+
+    ### `hypertheory-documents-enrollment`
+
+    An enrollment in an offering.
+
+    [The hypertheory-documents-enrollment protobuf](/docs/domain/hypertheory-documents-enrollment.proto)
+
+    [The hypertheory-documents-enrollment-key protobuf](/docs/domain/hypertheory-documents-enrollment-key.proto)
+
+</markdown>

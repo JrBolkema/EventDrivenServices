@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "ms-azuretools.vscode-dapr",
+    "ms-azuretools.vscode-docker",
+    "editorconfig.editorconfig",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "mongodb.mongodb-vscode",
+    "cweijan.vscode-redis-client",
+    "humao.rest-client",
+    "jeppeandersen.vscode-kafka",
+    "ms-azuretools.vscode-tye",
+    "zxh404.vscode-proto3"
+  ]
+}

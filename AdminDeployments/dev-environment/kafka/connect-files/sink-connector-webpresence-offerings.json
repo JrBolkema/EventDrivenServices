@@ -1,0 +1,11 @@
+{
+  "name": "offering-to-webpresence",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "connection.uri": "mongodb://root:TokyoJoe138!@mongodb-sharded/",
+    "database": "web_db",
+    "collection": "offerings",
+    "topics": "hypertheory.training.outgoing.data.offerings_db.offerings",
+    "change.data.capture.handler": "com.mongodb.kafka.connect.sink.cdc.mongodb.ChangeStreamHandler"
+  }
+}

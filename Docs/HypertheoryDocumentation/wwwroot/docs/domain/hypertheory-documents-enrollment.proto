@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "Hypertheory.Documents";
+import "google/protobuf/timestamp.proto";
+
+message Enrollment {
+    string enrollmentId = 1;
+    string userId = 2;
+    string offeringId = 3;
+    
+    google.protobuf.Timestamp createdAt = 4;
+    string accountRepId = 5;
+    EnrollmentStatus status = 6;
+
+    enum EnrollmentStatus {
+        PENDING = 0;
+        APPROVED = 1;
+        DENIED = 2;
+        WAITLISTED = 3;
+    }
+}

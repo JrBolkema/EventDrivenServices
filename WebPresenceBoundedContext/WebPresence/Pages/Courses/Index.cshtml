@@ -1,0 +1,21 @@
+﻿@page
+@model WebPresence.Pages.Courses.CoursesIndexModel
+@{
+}
+
+<h2>Our Training Library</h2>
+
+
+@foreach (var course in Model.Courses)
+{
+    <div class="card">
+        <div class="card-header">
+            <h5>@course.Title</h5></div>
+       
+       
+        <div class="card-footer">
+            <p>This is a @course.NumberOfDays day course.</p>
+            <p><a asp-page="/Courses/Details" asp-route-courseId="@course.Id" class="btn btn-primary btn-sm">See Details About This Course And Upcoming Offerings</a></p>
+        </div>
+    </div>
+}

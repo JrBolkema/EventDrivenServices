@@ -1,0 +1,144 @@
+asyncapi: 2.4.0
+info:
+  title: Hypertheory Web Presence
+  version: 0.1.0
+  description: |
+    The Hypertheory Web Presence Bounded Context
+    ### Responsible For
+
+    * All The Web Presence in the Hypertheory Domain
+
+  contact:
+    name: Jeff Gonzalez
+    email: jeff@hypertheory.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  local-dev:
+    url: localhost:6379
+    description: Local Development using Redis in With Dapr
+    protocol: Redis
+  dev:
+    url: localhost:9092
+    description: kafka
+    protocol: kafka
+
+channels:
+  webpresence-internal-user-created:
+    description: Whenever a new web user is created
+    publish:
+      summary: An event sent when a user creates an account
+      message:
+        $ref: "#/components/messages/userCreated"
+  webpresence-internal-enrollment-request-created:
+    description: Whenever a user requests an enrollment
+    publish:
+      summary: An even sent when a user requests enrollment into an offering
+      message:
+        $ref: "#/components/messages/enrollmentRequested"
+  webpresence-internal-user-deactivated:
+    description: Used to deactivate a web user
+    subscribe:
+      summary: Upon receipt, the user account will be deactivated
+      message:
+        $ref: "#/components/messages/userDeactivationRequested"
+  webpresence-internal-enrollment-request-rejected:
+    description: The enrollment request was rejected
+    subscribe:
+      summary: The enrollment request will be marked as rejected
+      message:
+        $ref: "#/components/messages/enrollmentRejectionRequested"
+  webpresence-internal-enrollment-request-cancelled:
+    description: The enrollment request was cancelled
+    subscribe:
+      summary: The enrollment was cancelled and should be deleted.
+      message:
+        $ref: "#/components/messages/enrollmentCancellationRequested"
+
+components:
+  messages:
+    userCreated:
+      name: userCreatedMessage
+      payload:
+        $ref: "#/components/schemas/userCreatedPayload"
+    enrollmentRequested:
+      name: enrollmentRequestedMessage
+      payload:
+        $ref: "#/components/schemas/enrollmentRequestedPayload"
+    userDeactivationRequested:
+      name: userDeactivationMessage
+      payload:
+        $ref: "#/components/schemas/userDeactivationPayload"
+    enrollmentRejectionRequested:
+      name: enrollmentRejectionMessage
+      payload:
+        $ref: "#/components/schemas/enrollmentStatusChange"
+    enrollmentCancellationRequested:
+      name: enrollmentCancellationMessage
+      payload:
+        $ref: "#/components/schemas/enrollmentStatusChange"
+  schemas:
+    userCreatedPayload:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: the supplied first name of the web user.
+        lastName:
+          type: string
+          description: the supplied last name of the web user.
+        userId:
+          type: string
+          description: the id created for the user in the bounded context
+        email:
+          type: string
+          description: the email address supplied by the web user
+        created:
+          type: string
+          format: dateTime
+          description: when the user was created
+    enrollmentRequestedPayload:
+      type: object
+      properties:
+        enrollmentId:
+          type: string
+          description: the enrollment id stored locally
+        userId:
+          type: string
+          description: the id of the user requesting enrollment
+        offeringId:
+          type: string
+          description: the id of the offering they are requesting enrolment in
+        courseId:
+          type: string
+          description: the id of the course
+        created:
+          type: string
+          format: dateTime
+          description: When the request was made
+    userDeactivationPayload:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The user id of the user to deactivate
+        whenDeactivated:
+          type: string
+          format: dateTime
+          description: When the user was deactivated
+    enrollmentStatusChange:
+      type: object
+      required:
+        - enrollmentId
+        - userId
+      properties:
+        enrollmentId:
+          type: string
+          description: The id of the enrollment request
+        userId:
+          type: string
+          description: The user id associated with the enrollment request
+        reason:
+          type: string
+          description: The reason, if any.

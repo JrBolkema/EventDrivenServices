@@ -1,0 +1,20 @@
+﻿@page
+@model WebPresence.Pages.Enrollments.IndexModel
+@{
+}
+
+<h3>Your Enrollments:</h3>
+@if(Model.Summary.Enrollments.Count == 0) {
+    <div class="alert alert-info">
+    <h3>You are not currently enrolled in any offerings.</h3>
+</div>
+}
+@foreach(var enrollment in Model.Summary.Enrollments) {
+
+
+    <div class="alert alert-info">
+        <h5>@enrollment.CourseTitle</h5>
+        <p>You enrolled in this course on @enrollment.EnrolledDate.ToLongDateString() at @enrollment.EnrolledDate.ToShortTimeString()</p>
+        <p>Your Status for this course is @enrollment.Status</p>
+    </div>
+}

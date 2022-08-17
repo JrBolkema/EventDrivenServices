@@ -1,0 +1,11 @@
+{
+  "name": "course",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSourceConnector",
+    "connection.uri": "mongodb://root:TokyoJoe138!@mongodb-sharded/",
+    "topic.prefix": "hypertheory.training.outgoing.data",
+    "database": "courses_db",
+    "collection": "courses",
+    "copy.existing": "true"
+  }
+}

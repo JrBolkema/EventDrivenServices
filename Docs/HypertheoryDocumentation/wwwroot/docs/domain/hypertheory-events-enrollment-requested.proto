@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Hypertheory.Events";
+
+message EnrollmentRequested {
+  string offeringId = 1;
+  string studentId = 2;
+  string originator = 3;
+}

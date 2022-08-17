@@ -1,0 +1,29 @@
+﻿@page "{offeringId}"
+@model WebPresence.Pages.Enrollments.NewModel
+@{
+}
+
+
+
+@if(Model.AlreadyEnrolled) {
+    <div class="alert alert-danger">
+        <p>You are already Enrolled in this Offering!</p>
+    </div>
+} else {
+    <div>
+        <h3>Request Enrollment In @Model.Course.Title on @Model.Offering.StartDate.ToLongDateString()</h3>
+        @{
+            var endDate = Model.Offering.StartDate.AddDays(Model.Course.NumberOfDays);
+        }
+        <p>This course starts on @Model.Offering.StartDate.ToShortDateString() and ends on @endDate.ToShortDateString() (it is a @Model.Course.NumberOfDays day course.) </p>
+        <p>Class starts at @Model.Offering.StartTime and ends at @Model.Offering.EndTime.</p>
+        <p class="alert alert-info">You will be expected to participate fully during class times.</p>
+        <p>This class is @Model.Offering.Location</p>
+        <p>By Clicking "Enroll" Below you agree to "pay" Hypertheory the amount of @Model.Offering.Price.ToString("c") <em>Note, not really. And they take XBox gift cards or beer as payment, if you can't pay cash.</em></p>
+    </div>
+    <form method="post">
+        <input asp-for="OfferingId" type="hidden">
+        <input asp-for="CourseId" type="hidden">
+        <button type="submit" class="btn btn-success">Please Enroll Me In This Course</button>
+    </form>
+}
