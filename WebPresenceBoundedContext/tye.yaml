@@ -12,11 +12,16 @@ ingress:
 
 extensions:
   - name: dapr
-    components-path: ./components/dev
+    components-path: ./components/prod
 
 services:
   - name: webpresence
     project: WebPresence/WebPresence.csproj
+  - name: webpresenceacl
+    project: WebPresenceAntiCorruptionLayer/WebPresenceAntiCorruptionLayer.csproj
+    env:
+      - name: Kafka__ProducerSettings__Bootstrapservers
+        value: "localhost:9092"
 
   # External Services
 
@@ -25,3 +30,8 @@ services:
     bindings:
       - port: 27017
         connectionString: mongodb://root:TokyoJoe138!@localhost:${port}
+  - name: schema-registry
+    external: true
+    bindings:
+      - port: 8081
+        connectionString: http://localhost:${port}/

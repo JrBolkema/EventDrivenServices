@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "Hypertheory.Events";
+
+message UserOnboarded {
+  string userId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  string source = 5;
+}

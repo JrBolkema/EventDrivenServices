@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapr.AspNetCore" Version="1.8.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+    <PackageReference Include="Hypertheory.KafkaUtils" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebPresenceMessages\WebPresenceMessages.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos\hypertheory-events-enrollment-requested.proto" GrpcServices="None">
+      <SourceUri>http://localhost:5005/docs/domain/hypertheory-events-enrollment-requested.proto</SourceUri>
+    </Protobuf>
+    <Protobuf Include="Protos\hypertheory-events-useronboarded.proto" GrpcServices="None">
+      <SourceUri>http://localhost:5005/docs/domain/hypertheory-events-useronboarded.proto</SourceUri>
+    </Protobuf>
+  </ItemGroup>
+
+</Project>
